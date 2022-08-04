@@ -1,0 +1,8 @@
+#!/bin/bash
+
+i3status | while :
+do
+        read line
+        lvl=$(awk 'NR==3 {print $NF}' /proc/acpi/ibm/fan)
+        echo " $lvl | $line" || exit 1
+done

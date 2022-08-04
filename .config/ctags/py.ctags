@@ -1,0 +1,15 @@
+--recurse=yes
+--tag-relative=yes
+--exclude=.DS_Store
+--exclude=*.md
+--exclude=*.mkd
+--exclude=*.json
+--exclude=*.html
+--exclude=.ipynb_checkpoints
+--exclude=.pytest_cache
+--exclude=docs
+--exclude=data
+--exclude=env
+--exclude=__pycache__
+
+--python-kinds=-i

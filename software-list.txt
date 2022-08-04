@@ -1,0 +1,42 @@
+UTILS:
+------
+Flameshot screenshot tool
+Font manager
+Go for it! pomodoro timer
+nitrogen
+mendeley desktop 
+GIMP
+Okular pdf
+OBS Studio screen recorder
+arandr with autorandr (for automatic monitor mgmt)
+alacritty terminal
+ranger - term files
+pcmanfm - files
+Lotion for notion
+brave browser
+markdown_previewer
+
+
+TERMINAL:
+---------
+powerlevel10k zsh
+nerd-fonts
+ripgrep
+fzf
+
+
+FONTS:
+------
+Jetbrains Mono
+Iosevka terminal
+
+
+SYSTEM:
+-------
+i3-gaps rounded: https://github.com/terroo/i3-radius
+thinkfan: https://gist.github.com/Yatoom/1c80b8afe7fa47a938d3b667ce234559
+
+
+OS:
+---
+manjaro-i3
