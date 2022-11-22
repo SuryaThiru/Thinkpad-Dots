@@ -279,6 +279,9 @@ let g:netrw_winsize = -28
 " Quick vim config
 command SourceConfig source ~/.vimrc
 command VimConfig tabedit ~/.vimrc
+
+" Save file with root permission
+command SudoSave :execute ':silent w !sudo tee % > /dev/null' | :edit!
 "------------------------------------------------------------------------------------------------------------------
 
 "------------------------------------------------------------------------------------------------------------------
