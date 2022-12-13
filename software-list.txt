@@ -4,7 +4,7 @@ Flameshot screenshot tool
 Font manager
 Go for it! pomodoro timer
 nitrogen
-mendeley desktop 
+mendeley desktop
 GIMP
 Okular pdf
 OBS Studio screen recorder
@@ -15,6 +15,7 @@ pcmanfm - files
 Lotion for notion
 brave browser
 markdown_previewer
+pavucontrol - audio controls
 
 
 TERMINAL:
@@ -27,6 +28,7 @@ fzf
 
 FONTS:
 ------
+noto-fonts-emoji  - need this to get colored fonts in system and browser to work
 Jetbrains Mono
 Iosevka terminal
 
