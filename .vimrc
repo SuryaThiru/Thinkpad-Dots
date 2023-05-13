@@ -130,7 +130,7 @@ let g:NERDCustomDelimiters = {
 " Async autocompletion
 Plugin 'maralla/completor.vim'
 " let g:completor_completion_delay = 50
-let g:completor_python_binary = '/home/suryak/miniconda3/bin/python'
+let g:completor_python_binary = 'python'
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
@@ -139,7 +139,10 @@ noremap <silent> K :call completor#do('doc')<CR>
 " Syntastic
 Plugin 'scrooloose/syntastic'
 let g:syntastic_python_checkers = ['pylint', 'flake8']
-let g:syntastic_mode_map = { "mode": "passive" }
+let g:syntastic_mode_map = { "mode": "active" }
+let g:syntastic_quiet_messages = { "type": "style", "level": "warnings"}
+let g:syntastic_check_on_wq = 1
+let g:syntastic_check_on_open = 1
 set sessionoptions-=blank " Retain error list when saving vim session
 nnoremap <leader>sc :SyntasticCheck<CR>
 nnoremap <leader>sr :SyntasticReset<CR>
@@ -267,6 +270,8 @@ autocmd FileType php,c,java inoremap <expr> <cr>
 " buggy background color fix in kitty (xterm-kitty)
 " set t_ut= | set ttyscroll=1
 " let &t_ut=''
+
+" set ttymouse=xterm
 
 " splits below
 set splitbelow
