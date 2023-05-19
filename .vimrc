@@ -136,16 +136,12 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 noremap <silent> K :call completor#do('doc')<CR>
 
-" Syntastic
-Plugin 'scrooloose/syntastic'
-let g:syntastic_python_checkers = ['pylint', 'flake8']
-let g:syntastic_mode_map = { "mode": "active" }
-let g:syntastic_quiet_messages = { "type": "style", "level": "warnings"}
-let g:syntastic_check_on_wq = 1
-let g:syntastic_check_on_open = 1
-set sessionoptions-=blank " Retain error list when saving vim session
-nnoremap <leader>sc :SyntasticCheck<CR>
-nnoremap <leader>sr :SyntasticReset<CR>
+" ALE
+Plugin 'dense-analysis/ale'
+command Errors :ALEPopulateQuickfix
+let g:ale_virtualtext_cursor = 0
+let g:ale_python_flake8_options = '--extend-ignore=E501'
+
 
 " Snippets
 Plugin 'sirver/ultisnips'
@@ -316,9 +312,3 @@ nnoremap <silent> <Leader>< :exe "vertical resize " . float2nr(winwidth(0) * 1.1
 autocmd BufWritePre * %s/\s\+$//e
 "------------------------------------------------------------------------------------------------------------------
 
-
-
-"------------------------------------------------------------------------------------------------------------------
-" Remove trailing white spaces
-autocmd BufWritePre * %s/\s\+$//e
-"------------------------------------------------------------------------------------------------------------------
