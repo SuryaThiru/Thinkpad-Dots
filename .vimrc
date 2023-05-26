@@ -85,6 +85,28 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Buffer management
 Plugin 'jeetsukumaran/vim-buffergator'
 
+" multiple cursors
+Plugin 'terryma/vim-multiple-cursors'
+
+" status themes
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+" let g:airline_theme='base16_gruvbox_dark_hard'
+let g:airline_theme='violet'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+" Vim devicons
+Plugin 'ryanoasis/vim-devicons'
+
+" color schemes
+Plugin 'flazz/vim-colorschemes'
+
+" indent guides
+Plugin 'yggdroot/indentline'
+
+" increment sequence of numbers under visual selection
+Plugin 'triglav/vim-visual-increment'
 " Fuzzy finder
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
@@ -141,7 +163,23 @@ Plugin 'dense-analysis/ale'
 command Errors :ALEPopulateQuickfix
 let g:ale_virtualtext_cursor = 0
 let g:ale_python_flake8_options = '--extend-ignore=E501'
+nnoremap <leader>ar :ALERename<CR>
 
+" Debugger
+Plugin 'puremourning/vimspector'
+" let g:vimspector_enable_mappings = 'HUMAN'  " overrides mappings if uncommented
+" Reassign mappings
+nnoremap <S-F4> <Plug>VimspectorRestart
+nnoremap <S-F5> <Plug>VimspectorContinue
+nnoremap <S-F6> <Plug>VimspectorPause
+nnoremap <S-F8> <Plug>VimspectorAddFunctionBreakpoint
+nnoremap <F7> <Plug>VimspectorJumpToNextBreakpoint
+nnoremap <S-F7> <Plug>VimspectorJumpToPreviousBreakpoint
+nnoremap <F9> <Plug>VimspectorToggleBreakpoint
+nnoremap <F10> <Plug>VimspectorStepOver
+nnoremap <F11> <Plug>VimspectorStepInto
+nnoremap <S-F11> <Plug>VimspectorStepOut
+" NOTE: copy the default vimspector config {HOME}/.vim/bundle/vimspector/configurations/linux/python
 
 " Snippets
 Plugin 'sirver/ultisnips'
@@ -186,28 +224,6 @@ set foldcolumn=1  " for mouse folding
 Plugin 'vim-python/python-syntax'
 let g:python_highlight_all = 1
 
-" multiple cursors
-Plugin 'terryma/vim-multiple-cursors'
-
-" status themes
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-" let g:airline_theme='base16_gruvbox_dark_hard'
-let g:airline_theme='violet'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-
-" Vim devicons
-Plugin 'ryanoasis/vim-devicons'
-
-" color schemes
-Plugin 'flazz/vim-colorschemes'
-
-" indent guides
-Plugin 'yggdroot/indentline'
-
-" increment sequence of numbers under visual selection
-Plugin 'triglav/vim-visual-increment'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
