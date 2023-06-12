@@ -1,0 +1,28 @@
+/*
+rofi-calc: https://github.com/svenstaro/rofi-calc
+rofi-themes: https://github.com/newmanls/rofi-themes-collection
+*/
+
+configuration {
+ modi: "combi,filebrowser,calc,window,run,drun,ssh";
+/* font: "hack 4";*/
+ combi-modi: "window,drun,run,ssh";
+ display-combi: "";
+ icon-theme: "Papirus";
+ show-icons: true;
+ width: 10;
+ dpi: 250;  /* works for 4k */
+}
+
+@theme "/home/surya/.local/share/rofi/themes/rounded-purple-dark.rasi"
+
+
+window {
+ width: 50%;
+ padding: 20;
+ y-offset: -15%;
+}
+
+element {
+ padding: 10;
+}

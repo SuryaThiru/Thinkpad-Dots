@@ -16,6 +16,7 @@ Lotion for notion
 brave browser
 markdown_previewer
 pavucontrol - audio controls
+spotify-launcher
 
 
 TERMINAL:
