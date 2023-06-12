@@ -172,6 +172,7 @@ Plugin 'puremourning/vimspector'
 nnoremap <S-F4> <Plug>VimspectorRestart
 nnoremap <S-F5> <Plug>VimspectorContinue
 nnoremap <S-F6> <Plug>VimspectorPause
+nnoremap <C-S-F6> :VimspectorReset<CR>
 nnoremap <S-F8> <Plug>VimspectorAddFunctionBreakpoint
 nnoremap <F7> <Plug>VimspectorJumpToNextBreakpoint
 nnoremap <S-F7> <Plug>VimspectorJumpToPreviousBreakpoint
@@ -219,6 +220,7 @@ Plugin 'alfredodeza/pytest.vim'
 " Python folding
 Plugin 'tmhedberg/SimpylFold'
 set foldcolumn=1  " for mouse folding
+set nofoldenable  " disable fold on open
 
 " Python better syntax highlighting
 Plugin 'vim-python/python-syntax'
