@@ -5,9 +5,11 @@ rofi-themes: https://github.com/newmanls/rofi-themes-collection
 
 configuration {
  modi: "combi,filebrowser,calc,window,run,drun,ssh";
-/* font: "hack 4";*/
+ /* font: "hack 10"; */
  combi-modi: "window,drun,run,ssh";
  display-combi: "";
+ display-window: "Win";
+ display-drun: "";
  icon-theme: "Papirus";
  show-icons: true;
  width: 10;
@@ -16,11 +18,11 @@ configuration {
 
 @theme "/home/surya/.local/share/rofi/themes/rounded-purple-dark.rasi"
 
-
 window {
+ location: north;
  width: 50%;
  padding: 20;
- y-offset: -15%;
+ y-offset: 15%;
 }
 
 element {
