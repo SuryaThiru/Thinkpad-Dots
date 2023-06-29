@@ -107,6 +107,7 @@ Plugin 'yggdroot/indentline'
 
 " increment sequence of numbers under visual selection
 Plugin 'triglav/vim-visual-increment'
+
 " Fuzzy finder
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
@@ -163,7 +164,11 @@ Plugin 'dense-analysis/ale'
 command Errors :ALEPopulateQuickfix
 let g:ale_virtualtext_cursor = 0
 let g:ale_python_flake8_options = '--extend-ignore=E501'
+let g:ale_fixers = {
+\  'python': ['isort', 'autoflake', 'autoimport']
+\}
 nnoremap <leader>ar :ALERename<CR>
+nnoremap <leader>af :ALEFix<CR>
 
 " Debugger
 Plugin 'puremourning/vimspector'
@@ -330,3 +335,7 @@ nnoremap <silent> <Leader>< :exe "vertical resize " . float2nr(winwidth(0) * 1.1
 autocmd BufWritePre * %s/\s\+$//e
 "------------------------------------------------------------------------------------------------------------------
 
+"------------------------------------------------------------------------------------------------------------------
+" Search for todo and fixme comments
+command Todo :cexpr system('rg --vimgrep TODO\|FIXME') | :cwin
+"------------------------------------------------------------------------------------------------------------------
