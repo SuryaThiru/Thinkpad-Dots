@@ -34,9 +34,20 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
+set incsearch
+
 set mouse=a
+set smoothscroll
 
 set timeoutlen=1000 ttimeoutlen=10
+
+" splits below
+set splitbelow
+
+" command line completion
+set wildmenu
+set wildmode=longest:full,full
+set wildoptions=pum
 
 "=================================================================================================================
 " PLUGINS
@@ -292,9 +303,6 @@ autocmd FileType php,c,java inoremap <expr> <cr>
 
 " set ttymouse=xterm
 
-" splits below
-set splitbelow
-
 " netrw default open behavior
 let g:netrw_browse_split = 4
 let g:netrw_winsize = -28
@@ -331,6 +339,14 @@ nnoremap <silent> <Leader>< :exe "vertical resize " . float2nr(winwidth(0) * 1.1
 "------------------------------------------------------------------------------------------------------------------
 
 "------------------------------------------------------------------------------------------------------------------
+" Move lines
+nnoremap <Leader>mj :m+1<CR>    " move line down
+nnoremap <Leader>mk :m-2<CR>    " move line up
+vnoremap <Leader>mj :m+2<CR>    " move line down
+vnoremap <Leader>mk :m-2<CR>    " move line up
+"------------------------------------------------------------------------------------------------------------------
+
+"------------------------------------------------------------------------------------------------------------------
 " Remove trailing white spaces
 autocmd BufWritePre * %s/\s\+$//e
 "------------------------------------------------------------------------------------------------------------------
@@ -338,4 +354,15 @@ autocmd BufWritePre * %s/\s\+$//e
 "------------------------------------------------------------------------------------------------------------------
 " Search for todo and fixme comments
 command Todo :cexpr system('rg --vimgrep TODO\|FIXME') | :cwin
+"------------------------------------------------------------------------------------------------------------------
+
+"------------------------------------------------------------------------------------------------------------------
+" Auto enclose parenthesis. Puts a word in parenthesis and keeps cursor before
+" opening parenthesis
+nnoremap <Leader>( ciw(<esc>pa)<esc>%i
+vnoremap <Leader>( c(<esc>pa)<esc>%i
+nnoremap <Leader>" ciw"<esc>pa"<esc>%i
+vnoremap <Leader>" c"<esc>pa"<esc>%i
+nnoremap <Leader>[ ciw[<esc>pa]<esc>%i
+vnoremap <Leader>[ c[<esc>pa]<esc>%i
 "------------------------------------------------------------------------------------------------------------------
