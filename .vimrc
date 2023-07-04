@@ -49,6 +49,9 @@ set wildmenu
 set wildmode=longest:full,full
 set wildoptions=pum
 
+" change the leader key
+let mapleader = "\<Space>"
+
 "=================================================================================================================
 " PLUGINS
 "=================================================================================================================
@@ -82,6 +85,32 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " Space vim colorscheme
 Plugin 'liuchengxu/space-vim-dark'
+
+" Startify
+Plugin 'mhinz/vim-startify'
+let g:startify_custom_header = [
+            \ '    ___    ________________  ___',
+            \ '    __ |  / /____  _/___   |/  /',
+            \ '    __ | / /  __  /  __  /|_/ /',
+            \ '    __ |/ /  __/ /   _  /  / /',
+            \ '    _____/   /___/   /_/  /_/',
+            \]
+
+function! s:mru_dirs()
+  " get 5 most recently used working directories
+  let dirs = uniq(map(copy(v:oldfiles), 'fnamemodify(v:val, ":h")'))[:4]
+  return map(dirs, '{"line": fnamemodify(v:val, ":."), "path": v:val}')
+endfunction
+
+let g:startify_files_number = 5
+let g:startify_lists = [
+      \ { 'header': ['   MRU dirs'],       'type': function('s:mru_dirs') },
+      \ { 'header': ['   MRU'],            'type': 'files' },
+      \ ]
+
+" WhichKey
+Plugin 'liuchengxu/vim-which-key'
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 
 " Auto close
 Plugin 'AutoClose'
@@ -128,6 +157,15 @@ let g:fzf_layout = { 'window': { 'width': 0.7, 'height': 0.6 } }
 command B Buffers
 command F Files
 command T Tags
+nnoremap <Leader>ff :Files<CR>
+nnoremap <Leader>fb :Buffers<CR>
+nnoremap <Leader>fw :Windows<CR>
+nnoremap <Leader>fr :Rg<CR>
+nnoremap <Leader>fg :GFiles?<CR>
+nnoremap <Leader>fm :Marks<CR>
+nnoremap <Leader>fmp :Maps<CR>
+nnoremap <Leader>ft :Tags<CR>
+nnoremap <Leader>fc :Colors<CR>
 
 " Tag bar
 Plugin 'majutsushi/tagbar'
@@ -329,6 +367,19 @@ autocmd FileChangedShellPost *
   \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 "------------------------------------------------------------------------------------------------------------------
 
+"------------------------------------------------------------------------------------------------------------------
+" Tab to switch between buffers TODO: this
+nnoremap <Tab> :bn<CR>
+nnoremap <S-Tab> :bp<CR>
+"------------------------------------------------------------------------------------------------------------------
+
+"------------------------------------------------------------------------------------------------------------------
+" Moving between windows
+nnoremap <C-h> <C-w>h
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+nnoremap <C-l> <C-w>l
+"------------------------------------------------------------------------------------------------------------------
 
 "------------------------------------------------------------------------------------------------------------------
 " Quick window resize
