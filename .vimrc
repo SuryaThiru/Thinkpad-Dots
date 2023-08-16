@@ -23,34 +23,6 @@
 "          _____\//\\\\\__________\/\\\_____\/\\\_____________\/\\\_\/\\\_____\//\\\___\///\\\__________
 "           ______\//\\\________/\\\\\\\\\\\_\/\\\_____________\/\\\_\/\\\______\//\\\____\////\\\\\\\\\_
 "            _______\///________\///////////__\///______________\///__\///________\///________\/////////__
-"=================================================================================================================
-" MUST HAVE'S
-"=================================================================================================================
-set nu
-syntax on
-
-set tabstop=8
-set shiftwidth=4
-set softtabstop=4
-set expandtab
-
-set incsearch
-
-set mouse=a
-set smoothscroll
-
-set timeoutlen=1000 ttimeoutlen=10
-
-" splits below
-set splitbelow
-
-" command line completion
-set wildmenu
-set wildmode=longest:full,full
-set wildoptions=pum
-
-" change the leader key
-let mapleader = "\<Space>"
 
 "=================================================================================================================
 " PLUGINS
@@ -89,11 +61,21 @@ Plugin 'liuchengxu/space-vim-dark'
 " Startify
 Plugin 'mhinz/vim-startify'
 let g:startify_custom_header = [
-            \ '    ___    ________________  ___',
-            \ '    __ |  / /____  _/___   |/  /',
-            \ '    __ | / /  __  /  __  /|_/ /',
-            \ '    __ |/ /  __/ /   _  /  / /',
-            \ '    _____/   /___/   /_/  /_/',
+            \ "\t\t         ________ ++     ________ ",
+            \ "\t\t        /VVVVVVVV\\++++  /VVVVVVVV\\",
+            \ "\t\t        \\VVVVVVVV/++++++\\VVVVVVVV/",
+            \ "\t\t         |VVVVVV|++++++++/VVVVV/' ",
+            \ "\t\t         |VVVVVV|++++++/VVVVV/'   ",
+            \ "\t\t        +|VVVVVV|++++/VVVVV/'+    ",
+            \ "\t\t      +++|VVVVVV|++/VVVVV/'+++++  ",
+            \ "\t\t    +++++|VVVVVV|/VVVVV/'+++++++++",
+            \ "\t\t      +++|VVVVVVVVVVV/'+++++++++  ",
+            \ "\t\t        +|VVVVVVVVV/'+++++++++    ",
+            \ "\t\t         |VVVVVVV/'+++++++++      ",
+            \ "\t\t         |VVVVV/'+++++++++        ",
+            \ "\t\t         |VVV/'+++++++++          ",
+            \ "\t\t         'V/'   ++++++            ",
+            \ "\t\t                  ++              ",
             \]
 
 function! s:mru_dirs()
@@ -121,9 +103,27 @@ map <silent> <C-f> :NERDTreeFocus<CR>
 
 " Nerdtree git plugin
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+let g:NERDTreeGitStatusUseNerdFonts = 1
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
 
-" Buffer management
-Plugin 'jeetsukumaran/vim-buffergator'
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
 " multiple cursors
 Plugin 'terryma/vim-multiple-cursors'
@@ -144,6 +144,7 @@ Plugin 'flazz/vim-colorschemes'
 
 " indent guides
 Plugin 'yggdroot/indentline'
+let g:indentLine_fileTypeExclude = [ 'startify' ]
 
 " increment sequence of numbers under visual selection
 Plugin 'triglav/vim-visual-increment'
@@ -198,6 +199,9 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDCustomDelimiters = {
       \ 'python': { 'left': '#', 'right': '' }
       \ }
+
+" CSV
+Plugin 'chrisbra/csv.vim'
 
 " Async autocompletion
 Plugin 'maralla/completor.vim'
@@ -266,6 +270,7 @@ nnoremap <F4> :REPLToggle<Cr>
 Plugin 'heavenshell/vim-pydocstring'
 let g:pydocstring_doq_path = "/home/suryak/miniconda3/bin/doq"
 let g:pydocstring_formatter = 'google'
+let g:pydocstring_enable_mapping = 0
 nnoremap <leader>ds :Pydocstring<CR>
 
 " Pytest
@@ -296,6 +301,34 @@ filetype plugin on
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+"=================================================================================================================
+" MUST HAVE'S
+"=================================================================================================================
+set nu
+syntax on
+
+set tabstop=8
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+
+set incsearch
+
+set mouse=a
+set smoothscroll
+
+set timeoutlen=1000 ttimeoutlen=10
+
+" splits below
+set splitbelow
+
+" command line completion
+set wildmenu
+set wildmode=longest:full,full
+set wildoptions=pum
+
+" change the leader key
+let mapleader = "\<Space>"
 
 "=================================================================================================================
 " CUSTOM BINDINGS AND CONFIGS
@@ -314,6 +347,8 @@ colorscheme space-vim-dark
 hi LineNr ctermbg=NONE guibg=NONE
 hi Comment guifg=#5C6370 ctermfg=59
 
+" terminal normal mode
+:tnoremap <Esc> <C-w>N
 
 " comments in italic
 highlight Comment cterm=italic gui=italic
@@ -368,7 +403,7 @@ autocmd FileChangedShellPost *
 "------------------------------------------------------------------------------------------------------------------
 
 "------------------------------------------------------------------------------------------------------------------
-" Tab to switch between buffers TODO: this
+" Tab to switch between buffers
 nnoremap <Tab> :bn<CR>
 nnoremap <S-Tab> :bp<CR>
 "------------------------------------------------------------------------------------------------------------------
@@ -405,6 +440,7 @@ autocmd BufWritePre * %s/\s\+$//e
 "------------------------------------------------------------------------------------------------------------------
 " Search for todo and fixme comments
 command Todo :cexpr system('rg --vimgrep TODO\|FIXME') | :cwin
+nnoremap <Leader>td :Todo<CR>
 "------------------------------------------------------------------------------------------------------------------
 
 "------------------------------------------------------------------------------------------------------------------
