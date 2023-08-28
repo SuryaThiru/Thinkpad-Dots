@@ -27,6 +27,8 @@
 "=================================================================================================================
 " PLUGINS
 "=================================================================================================================
+" change the leader key
+let mapleader = "\<Space>"
 
 " vundle stuff
 set nocompatible              " be iMproved, required
@@ -327,8 +329,6 @@ set wildmenu
 set wildmode=longest:full,full
 set wildoptions=pum
 
-" change the leader key
-let mapleader = "\<Space>"
 
 "=================================================================================================================
 " CUSTOM BINDINGS AND CONFIGS
