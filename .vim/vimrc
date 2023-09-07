@@ -217,14 +217,14 @@ noremap <silent> K :call completor#do('doc')<CR>
 
 " ALE
 Plugin 'dense-analysis/ale'
-command Errors :ALEPopulateQuickfix
 let g:ale_virtualtext_cursor = 0
 let g:ale_python_flake8_options = '--extend-ignore=E501'
 let g:ale_fixers = {
-\  'python': ['isort', 'autoflake', 'autoimport']
+\  'python': ['isort', 'autoflake', 'autoimport', 'black', 'pycln']
 \}
 nnoremap <leader>ar :ALERename<CR>
 nnoremap <leader>af :ALEFix<CR>
+nnoremap <leader>ae :ALEPopulateQuickfix<CR>
 
 " Debugger
 Plugin 'puremourning/vimspector'
@@ -253,12 +253,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/bundle/vim-snippets/UltiSnips']
 
-" Autopep8 for python
-Plugin 'tell-k/vim-autopep8'
-
-" Black formatter for python
-Plugin 'psf/black'
-
 " VIM REPL
 Plugin 'sillybun/vim-repl'
 let g:repl_program = {
@@ -281,8 +275,8 @@ Plugin 'alfredodeza/pytest.vim'
 
 " Python folding
 Plugin 'tmhedberg/SimpylFold'
-set foldcolumn=1  " for mouse folding
-set nofoldenable  " disable fold on open
+" set foldcolumn=1  " for mouse folding
+" set nofoldenable  " disable fold on open
 
 " Python better syntax highlighting
 Plugin 'vim-python/python-syntax'
