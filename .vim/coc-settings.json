@@ -1,0 +1,7 @@
+{
+    "codeLens.enable": true,
+    "suggest.noselect": true,
+    // python config
+    "python.formatting.provider": "black"
+}
+
