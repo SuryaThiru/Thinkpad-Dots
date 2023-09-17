@@ -388,22 +388,12 @@ set wildoptions=pum
 " Omni complete enable
 set omnifunc=syntaxcomplete#Complete
 
-" aliases for commands and stuff used temporarily
-" source ~/.vim/alias.vim
-
 set termguicolors
 set background=dark
 " Space vim dark setup
 colorscheme space-vim-dark
 hi LineNr ctermbg=NONE guibg=NONE
 hi Comment guifg=#5C6370 ctermfg=59
-
-" terminal normal mode
-:tnoremap <Esc> <C-w>N
-:tnoremap <ScrollWheelUp> <C-w>N
-:tnoremap <ScrollWheelDown> <C-w>N
-" terminal shortcut
-nnoremap <leader>t :term<CR>
 
 " comments in italic
 highlight Comment cterm=italic gui=italic
@@ -417,12 +407,19 @@ let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
 
 "------------------------------------------------------------------------------------------------------------------
-" brackets cursor placement
-autocmd FileType php,c,java inoremap <expr> <cr>
-   \   getline(".") =~ '\S\s*{$'                 ? "<bs><cr>{<cr>}<esc>O"
-   \ : getline('.') =~ '^\s*{$'                  ? "<cr>}<esc>O"
-   \ : getline(".")[col(".")-2:col(".")-1]=="{}" ? "<cr><esc>O"
-   \ :                                             "<cr>"
+" terminal mode remaps
+
+" terminal normal mode
+:tnoremap <Esc> <C-w>N
+:tnoremap <ScrollWheelUp> <C-w>N
+:tnoremap <ScrollWheelDown> <C-w>N
+
+" leave terminal window (only makes sense coz my terms are always at the
+" bottom)
+:tnoremap <C-k> <C-w>k
+
+" terminal shortcut
+nnoremap <leader>t :term<CR>
 "------------------------------------------------------------------------------------------------------------------
 
 " buggy background color fix in kitty (xterm-kitty)
@@ -459,8 +456,17 @@ autocmd FileChangedShellPost *
 
 "------------------------------------------------------------------------------------------------------------------
 " Tab to switch between buffers
-nnoremap <Tab> :bn<CR>
-nnoremap <S-Tab> :bp<CR>
+function! BSkipQuickFix(command)
+  " FIXME: use getbufvar(bufid, '&buftype', 'ERROR') & https://vi.stackexchange.com/questions/37393/how-to-get-the-buffer-number-of-bn
+  let start_buffer = bufnr('%')
+  execute a:command
+  while &buftype != '' && bufnr('%') != start_buffer
+    execute a:command
+  endwhile
+endfunction
+
+nnoremap <Tab> :call BSkipQuickFix("bn")<CR>
+nnoremap <S-Tab> :call BSkipQuickFix("bp")<CR>
 " Close buffers
 nnoremap <Leader>x :bd<CR>
 "------------------------------------------------------------------------------------------------------------------
