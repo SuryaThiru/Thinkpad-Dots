@@ -48,18 +48,6 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 "------------------------------------------------------------------------------------------------------------------
 
 "------------------------------------------------------------------------------------------------------------------
-" Auto enclose parenthesis. Puts a word in parenthesis and keeps cursor before
-" opening parenthesis
-
-nnoremap <Leader>( ciw(<esc>pa)<esc>%i
-vnoremap <Leader>( c(<esc>pa)<esc>%i
-nnoremap <Leader>" ciw"<esc>pa"<esc>%i
-vnoremap <Leader>" c"<esc>pa"<esc>%i
-nnoremap <Leader>[ ciw[<esc>pa]<esc>%i
-vnoremap <Leader>[ c[<esc>pa]<esc>%i
-"------------------------------------------------------------------------------------------------------------------
-
-"------------------------------------------------------------------------------------------------------------------
 " PEP 80 column limit
 highlight ColorColumn ctermbg=DarkGray
 setlocal colorcolumn=80
@@ -70,3 +58,4 @@ setlocal colorcolumn=80
 " Add breakpoint() for python above the current line
 nnoremap <Leader>bp Obreakpoint()<esc>
 "------------------------------------------------------------------------------------------------------------------
+

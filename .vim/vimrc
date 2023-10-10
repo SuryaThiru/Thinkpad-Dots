@@ -48,6 +48,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+nnoremap <Leader>g :G<CR>
 " Git gutter
 Plugin 'airblade/vim-gitgutter'
 
@@ -62,35 +63,7 @@ Plugin 'liuchengxu/space-vim-dark'
 
 " Startify
 Plugin 'mhinz/vim-startify'
-let g:startify_custom_header = [
-            \ "\t\t         ________ ++     ________ ",
-            \ "\t\t        /VVVVVVVV\\++++  /VVVVVVVV\\",
-            \ "\t\t        \\VVVVVVVV/++++++\\VVVVVVVV/",
-            \ "\t\t         |VVVVVV|++++++++/VVVVV/' ",
-            \ "\t\t         |VVVVVV|++++++/VVVVV/'   ",
-            \ "\t\t        +|VVVVVV|++++/VVVVV/'+    ",
-            \ "\t\t      +++|VVVVVV|++/VVVVV/'+++++  ",
-            \ "\t\t    +++++|VVVVVV|/VVVVV/'+++++++++",
-            \ "\t\t      +++|VVVVVVVVVVV/'+++++++++  ",
-            \ "\t\t        +|VVVVVVVVV/'+++++++++    ",
-            \ "\t\t         |VVVVVVV/'+++++++++      ",
-            \ "\t\t         |VVVVV/'+++++++++        ",
-            \ "\t\t         |VVV/'+++++++++          ",
-            \ "\t\t         'V/'   ++++++            ",
-            \ "\t\t                  ++              ",
-            \]
-
-function! s:mru_dirs()
-  " get 5 most recently used working directories
-  let dirs = uniq(map(copy(v:oldfiles), 'fnamemodify(v:val, ":h")'))[:4]
-  return map(dirs, '{"line": fnamemodify(v:val, ":."), "path": v:val}')
-endfunction
-
-let g:startify_files_number = 5
-let g:startify_lists = [
-      \ { 'header': ['   MRU dirs'],       'type': function('s:mru_dirs') },
-      \ { 'header': ['   MRU'],            'type': 'files' },
-      \ ]
+source ~/.vim/config/vim-startify.vim
 
 " WhichKey
 Plugin 'liuchengxu/vim-which-key'
@@ -105,27 +78,8 @@ map <silent> <C-f> :NERDTreeFocus<CR>
 
 " Nerdtree git plugin
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-let g:NERDTreeGitStatusUseNerdFonts = 1
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-                \ 'Modified'  :'✹',
-                \ 'Staged'    :'✚',
-                \ 'Untracked' :'✭',
-                \ 'Renamed'   :'➜',
-                \ 'Unmerged'  :'═',
-                \ 'Deleted'   :'✖',
-                \ 'Dirty'     :'✗',
-                \ 'Ignored'   :'☒',
-                \ 'Clean'     :'✔︎',
-                \ 'Unknown'   :'?',
-                \ }
 
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-" Close the tab if NERDTree is the only window remaining in it.
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+source ~/.vim/config/nerdtree.vim
 
 " multiple cursors
 Plugin 'terryma/vim-multiple-cursors'
@@ -147,6 +101,7 @@ Plugin 'flazz/vim-colorschemes'
 " indent guides
 Plugin 'yggdroot/indentline'
 let g:indentLine_fileTypeExclude = [ 'startify' ]
+let g:indentLine_char = '▏'
 
 " increment sequence of numbers under visual selection
 Plugin 'triglav/vim-visual-increment'
@@ -187,117 +142,19 @@ let g:session_default_name = fnamemodify(getcwd(), ':t')
 
 " NerdCommenter
 Plugin 'scrooloose/nerdcommenter'
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-" 2 spaces in python
-let g:NERDCustomDelimiters = {
-      \ 'python': { 'left': '#', 'right': '' }
-      \ }
-noremap <Leader>/ <plug>NERDCommenterToggle
+source ~/.vim/config/nerdcommenter.vim
 
 " CSV
 Plugin 'chrisbra/csv.vim'
 
 " Autocompletion
 Plugin 'neoclide/coc.nvim'
-let g:coc_global_extensions = ['coc-pyright', 'coc-json', 'coc-vimlsp']
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved
-set signcolumn=yes
-
-" Use tab for trigger completion with characters ahead and navigate
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice
-" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-inoremap <silent><expr> <c-@> coc#refresh()
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call ShowDocumentation()<CR>
-
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming
-nmap <leader>rn <Plug>(coc-rename)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s)
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-nmap <leader>ac  <Plug>(coc-codeaction-cursor)
-nmap <leader>qf  <Plug>(coc-fix-current)
-" nmap <silent> <leader>rf <Plug>(coc-codeaction-refactor)
-nmap <leader>cl  <Plug>(coc-codelens-action)
-nmap <leader>cf :call CocActionAsync('format')<CR>
-" refer docs for adding refactor methods
-nmap <Leader>si :CocCommand pyright.organizeimports<CR>
-nmap <Leader>er :CocDiagnostics<CR>
-
+let g:coc_config_home="~/.vim/config"
+source ~/.vim/config/coc.vim
 
 " Debugger
 Plugin 'puremourning/vimspector'
-" let g:vimspector_enable_mappings = 'HUMAN'  " overrides mappings if uncommented
-" Reassign mappings
-nnoremap <S-F4> <Plug>VimspectorRestart
-nnoremap <S-F5> <Plug>VimspectorContinue
-nnoremap <S-F6> <Plug>VimspectorPause
-nnoremap <C-S-F6> :VimspectorReset<CR>
-nnoremap <S-F8> <Plug>VimspectorAddFunctionBreakpoint
-nnoremap <F7> <Plug>VimspectorJumpToNextBreakpoint
-nnoremap <S-F7> <Plug>VimspectorJumpToPreviousBreakpoint
-nnoremap <F9> <Plug>VimspectorToggleBreakpoint
-nnoremap <F10> <Plug>VimspectorStepOver
-nnoremap <F11> <Plug>VimspectorStepInto
-nnoremap <S-F11> <Plug>VimspectorStepOut
-" NOTE: copy the default vimspector config {HOME}/.vim/bundle/vimspector/configurations/linux/python
+source ~/.vim/config/vimspector.vim
 
 " Snippets
 Plugin 'sirver/ultisnips'
@@ -502,60 +359,7 @@ autocmd BufWritePre * %s/\s\+$//e
 
 "------------------------------------------------------------------------------------------------------------------
 " TODO management
-call matchadd('Todo', '\<\(TODO\|NOTE\|FIXME\|WARNING\|HACK\)\>')
-
-function! HighlightTodoQF()
-    call matchadd('ErrorMsg', "")
-    call matchadd('WarningMsg', "")
-    call matchadd('Todo', "")
-    call matchadd('MoreMsg', "")
-    call matchadd('SpecialChar', "")
-endfunction
-
-function! FormatTodoQF(info)
-    echom info
-    let list = []
-    call add(list, info.icon)
-    return list
-endfunction
-
-" lot of hardcoding unfortunately
-function! TodoRg()
-    let rgoutput = system('rg --vimgrep TODO\|FIXME\|HACK\|NOTE\|WARNING')
-    let rg_lines = split(rgoutput, "\n")
-    let rg_qf = getqflist({'lines': rg_lines}).items
-
-    let qf_list = []
-
-    for parts in rg_qf
-        let text = parts['text']
-
-        if stridx(text, "FIXME") != -1
-            let icon = ""
-        elseif stridx(text, "TODO") != -1
-            let icon = ""
-        elseif stridx(text, "WARNING") != -1
-            let icon = ""
-        elseif stridx(text, "NOTE") != -1
-            let icon = ""
-        elseif stridx(text, "HACK") != -1
-            let icon = ""
-        endif
-
-        " Create a Quickfix entry dictionary
-        let parts['icon'] = icon
-        let parts['text'] = icon . " " . parts['text']
-
-        " Add the entry to the Quickfix list
-        call add(qf_list, parts)
-    endfor
-
-    call setqflist(qf_list)
-    cwin
-endfunction
-
-autocmd FileType qf call HighlightTodoQF()
-nnoremap <Leader>td :call TodoRg()<CR>
+source ~/.vim/plugin/todo.vim
 
 "------------------------------------------------------------------------------------------------------------------
 
