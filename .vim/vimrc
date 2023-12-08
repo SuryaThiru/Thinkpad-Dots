@@ -166,6 +166,12 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/bundle/vim-snippets/UltiSnips']
 
+" Async run commands
+Plugin 'skywind3000/asyncrun.vim'
+" Run files
+Plugin 'pedsm/sprint'
+nmap <F5> :Sprint<CR>
+
 " VIM REPL
 Plugin 'sillybun/vim-repl'
 let g:repl_program = {
@@ -189,7 +195,7 @@ Plugin 'alfredodeza/pytest.vim'
 " Python folding
 Plugin 'tmhedberg/SimpylFold'
 " set foldcolumn=1  " for mouse folding
-" set nofoldenable  " disable fold on open
+set nofoldenable  " disable fold on open
 
 " Python better syntax highlighting
 Plugin 'vim-python/python-syntax'

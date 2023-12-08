@@ -17,7 +17,7 @@ brave browser
 markdown_previewer
 pavucontrol - audio controls
 spotify-launcher
-
+rofi, rofi-calc
 
 TERMINAL:
 ---------

@@ -2,21 +2,7 @@ set tabstop=4
 set encoding=utf-8
 set autoindent
 
-" Open ipython shell inside vim
-" map <F4> :term ++close /home/surya/miniconda3/envs/ml/bin/ipython --no-confirm-exit<CR>
-
-" Load the custom python compiler, https://vi.stackexchange.com/questions/5110/quickfix-support-for-python-tracebacks
-if !exists("current_compiler")
-  compiler python
-endif
-
-"------------------------------------------------------------------------------------------------------------------
-" Run current python script with F5
 let current_python = substitute(system('which python'), '\n', ' ', "")
-" nmap <buffer> <F5> :execute "!" . current_python . @%<CR>
-nmap <buffer> <silent> <F5> :make<CR> :cw<CR>
-nmap <buffer> <silent> <C-F5> :make<CR> :copen<CR>
-"------------------------------------------------------------------------------------------------------------------
 
 "------------------------------------------------------------------------------------------------------------------
 " Pytest mappings, uses pytest in the current environment
