@@ -48,7 +48,10 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
-nnoremap <Leader>g :G<CR>
+nnoremap <Leader>gs :Git<CR>
+nnoremap <Leader>gl :Git pull<CR>
+nnoremap <Leader>gp :Git push<CR>
+nnoremap <Leader>gd :Gdiffsplit<CR>
 " Git gutter
 Plugin 'airblade/vim-gitgutter'
 
@@ -89,8 +92,9 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " let g:airline_theme='base16_gruvbox_dark_hard'
 let g:airline_theme='violet'
-let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#virtualenv#enabled = 1
 
 " Vim devicons
 Plugin 'ryanoasis/vim-devicons'
@@ -168,6 +172,7 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/bundle/vim-snippets/UltiSnips']
 
 " Async run commands
 Plugin 'skywind3000/asyncrun.vim'
+
 " Run files
 Plugin 'pedsm/sprint'
 nmap <F5> :Sprint<CR>
@@ -201,6 +206,12 @@ set nofoldenable  " disable fold on open
 Plugin 'vim-python/python-syntax'
 let g:python_highlight_all = 1
 
+" Requirements.txt support
+Plugin 'raimon49/requirements.txt.vim'
+
+" Markdown previewer
+Plugin 'iamcco/markdown-preview.nvim'
+nnoremap <leader>md :MarkdownPreviewToggle<CR>
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -227,6 +238,7 @@ set tabstop=8
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+set backspace=indent,eol,start  " Make backspace key more powerful
 
 set incsearch
 
@@ -234,6 +246,11 @@ set mouse=a
 set smoothscroll
 
 set timeoutlen=1000 ttimeoutlen=10
+set nobackup
+set nowritebackup
+
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
 
 " splits below
 set splitbelow
@@ -332,6 +349,12 @@ nnoremap <Tab> :call BSkipQuickFix("bn")<CR>
 nnoremap <S-Tab> :call BSkipQuickFix("bp")<CR>
 " Close buffers
 nnoremap <Leader>x :bd<CR>
+"------------------------------------------------------------------------------------------------------------------
+
+"------------------------------------------------------------------------------------------------------------------
+" Split windows
+nnoremap <Leader>ss :split<Return><C-w>w
+nnoremap <Leader>sv :vsplit<Return><C-w>w
 "------------------------------------------------------------------------------------------------------------------
 
 "------------------------------------------------------------------------------------------------------------------
