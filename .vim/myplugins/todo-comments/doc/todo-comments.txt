@@ -1,0 +1,8 @@
+*todo-comments.txt*   Simple plugin for finding todo comments in your code.
+
+The todo notes are found in comments across the working directory
+using ripgrep and resulting list is loaded up in a quickfix window.
+
+Mappings:
+<Leader>td
+    Show todo list in quickfix window

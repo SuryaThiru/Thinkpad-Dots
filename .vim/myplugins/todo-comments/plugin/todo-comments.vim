@@ -1,3 +1,8 @@
+if exists("g:loaded_todo")
+    finish
+endif
+let g:loaded_todo = 1
+
 "------------------------------------------------------------------------------------------------------------------
 " TODO management
 call matchadd('Todo', '\<\(TODO\|NOTE\|FIXME\|WARNING\|HACK\)\>')
@@ -17,8 +22,8 @@ function! FormatTodoQF(info)
     return list
 endfunction
 
-" lot of hardcoding unfortunately
-function! TodoRg()
+" lot of hardcoding and blocking unfortunately
+function! s:TodoRg()
     let rgoutput = system('rg --vimgrep TODO\|FIXME\|HACK\|NOTE\|WARNING')
     let rg_lines = split(rgoutput, "\n")
     let rg_qf = getqflist({'lines': rg_lines}).items
@@ -53,7 +58,13 @@ function! TodoRg()
 endfunction
 
 autocmd FileType qf call HighlightTodoQF()
-nnoremap <Leader>td :call TodoRg()<CR>
+" nnoremap <Leader>td :call TodoRg()<CR>
+
+if !hasmapto('<Plug>TodoList')
+    nnoremap <unique> <Leader>td <Plug>TodoList
+endif
+
+nnoremap <unique> <script> <Plug>TodoList :call <SID>TodoRg()<CR>
 
 "------------------------------------------------------------------------------------------------------------------
 

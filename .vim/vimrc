@@ -30,89 +30,70 @@
 " change the leader key
 let mapleader = "\<Space>"
 
-" vundle stuff
-set nocompatible              " be iMproved, required
-filetype off                  " required
 
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
+call plug#begin()
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 nnoremap <Leader>gs :Git<CR>
 nnoremap <Leader>gl :Git pull<CR>
 nnoremap <Leader>gp :Git push<CR>
 nnoremap <Leader>gd :Gdiffsplit<CR>
 " Git gutter
-Plugin 'airblade/vim-gitgutter'
-
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
+Plug 'airblade/vim-gitgutter'
 
 " Space vim colorscheme
-Plugin 'liuchengxu/space-vim-dark'
+Plug 'liuchengxu/space-vim-dark'
 
 " Startify
-Plugin 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'
 source ~/.vim/config/vim-startify.vim
 
 " WhichKey
-Plugin 'liuchengxu/vim-which-key'
+Plug 'liuchengxu/vim-which-key'
 nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 
 " Auto close
-Plugin 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
 " Nerdtree fileviewer
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 map <silent> <C-f> :NERDTreeFocus<CR>
 
 " Nerdtree git plugin
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 source ~/.vim/config/nerdtree.vim
 
 " multiple cursors
-Plugin 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi'
 
 " status themes
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-" let g:airline_theme='base16_gruvbox_dark_hard'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme='violet'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#virtualenv#enabled = 1
 
 " Vim devicons
-Plugin 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 " color schemes
-Plugin 'flazz/vim-colorschemes'
+Plug 'flazz/vim-colorschemes'
 
 " indent guides
-Plugin 'yggdroot/indentline'
+Plug 'yggdroot/indentline'
 let g:indentLine_fileTypeExclude = [ 'startify' ]
 let g:indentLine_char = '▏'
 
 " increment sequence of numbers under visual selection
-Plugin 'triglav/vim-visual-increment'
+Plug 'triglav/vim-visual-increment'
 
 " Fuzzy finder
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 " FZF configs
 let g:fzf_layout = { 'window': { 'width': 0.7, 'height': 0.6 } }
@@ -129,41 +110,44 @@ nnoremap <Leader>fmp :Maps<CR>
 nnoremap <Leader>ft :Tags<CR>
 nnoremap <Leader>fc :Colors<CR>
 
-" Tag bar
-Plugin 'majutsushi/tagbar'
+" Tag bar  TODO: change to vista https://github.com/liuchengxu/vista.vim
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 nmap <F8> :TagbarToggle<CR>
 
 " Tag management
-Plugin 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 
 " Session management
-Plugin 'xolox/vim-misc' " Dependency
-Plugin 'xolox/vim-session'
+Plug 'xolox/vim-misc' " Dependency
+Plug 'xolox/vim-session'
 nmap <F2> :SaveSession<CR>
 let g:session_autosave = 'yes'
 let g:session_autoload = 'yes'
 let g:session_default_name = fnamemodify(getcwd(), ':t')
 
 " NerdCommenter
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 source ~/.vim/config/nerdcommenter.vim
 
 " CSV
-Plugin 'chrisbra/csv.vim'
+Plug 'chrisbra/csv.vim'
 
 " Autocompletion
-Plugin 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_config_home="~/.vim/config"
 source ~/.vim/config/coc.vim
 
+" Copilot
+Plug 'github/copilot.vim'
+
 " Debugger
-Plugin 'puremourning/vimspector'
+Plug 'puremourning/vimspector'
 source ~/.vim/config/vimspector.vim
 
 " Snippets
-Plugin 'sirver/ultisnips'
+Plug 'sirver/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMeta.
 let g:UltiSnipsExpandTrigger="<c-t>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -171,14 +155,15 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/bundle/vim-snippets/UltiSnips']
 
 " Async run commands
-Plugin 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asyncrun.vim'
+let g:asyncrun_open = 8
 
 " Run files
-Plugin 'pedsm/sprint'
+Plug 'pedsm/sprint'
 nmap <F5> :Sprint<CR>
 
 " VIM REPL
-Plugin 'sillybun/vim-repl'
+Plug 'sillybun/vim-repl', { 'on': 'REPLToggle' }
 let g:repl_program = {
     \ 'python': 'ipython',
     \ 'r': 'R',
@@ -188,33 +173,36 @@ let g:repl_python_automerge = 1
 nnoremap <F4> :REPLToggle<Cr>
 
 " Pydoc strings
-Plugin 'heavenshell/vim-pydocstring'
+Plug 'heavenshell/vim-pydocstring', { 'on': 'Pydocstring' }
 let g:pydocstring_doq_path = "/home/suryak/miniconda3/bin/doq"
 let g:pydocstring_formatter = 'google'
 let g:pydocstring_enable_mapping = 0
 nnoremap <leader>ds :Pydocstring<CR>
 
 " Pytest
-Plugin 'alfredodeza/pytest.vim'
+Plug 'alfredodeza/pytest.vim', { 'on': 'Pytest' }
 
 " Python folding
-Plugin 'tmhedberg/SimpylFold'
+Plug 'tmhedberg/SimpylFold'
 " set foldcolumn=1  " for mouse folding
 set nofoldenable  " disable fold on open
 
 " Python better syntax highlighting
-Plugin 'vim-python/python-syntax'
+Plug 'vim-python/python-syntax'
 let g:python_highlight_all = 1
 
 " Requirements.txt support
-Plugin 'raimon49/requirements.txt.vim'
+Plug 'raimon49/requirements.txt.vim'
 
 " Markdown previewer
-Plugin 'iamcco/markdown-preview.nvim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 nnoremap <leader>md :MarkdownPreviewToggle<CR>
 
+" Todo comments
+Plug '~/.vim/myplugins/todo-comments'
+
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 filetype plugin on
@@ -225,7 +213,6 @@ filetype plugin on
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
-" see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
 "=================================================================================================================
@@ -384,12 +371,6 @@ vnoremap <Leader>mk :m-2<CR>    " move line up
 "------------------------------------------------------------------------------------------------------------------
 " Remove trailing white spaces
 autocmd BufWritePre * %s/\s\+$//e
-"------------------------------------------------------------------------------------------------------------------
-
-"------------------------------------------------------------------------------------------------------------------
-" TODO management
-source ~/.vim/plugin/todo.vim
-
 "------------------------------------------------------------------------------------------------------------------
 
 "------------------------------------------------------------------------------------------------------------------
