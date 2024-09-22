@@ -172,6 +172,10 @@ let g:repl_cursor_down = 1
 let g:repl_python_automerge = 1
 nnoremap <F4> :REPLToggle<Cr>
 
+" Jupyter
+Plug 'goerz/jupytext.vim'
+let g:jupytext_command = '~/miniconda3/bin/jupytext'
+
 " Pydoc strings
 Plug 'heavenshell/vim-pydocstring', { 'on': 'Pydocstring' }
 let g:pydocstring_doq_path = "/home/suryak/miniconda3/bin/doq"
@@ -200,6 +204,12 @@ nnoremap <leader>md :MarkdownPreviewToggle<CR>
 
 " Todo comments
 Plug '~/.vim/myplugins/todo-comments'
+
+" OSC52-yanking for windows terminal (ssh - tmux - vim)
+Plug 'ojroques/vim-oscyank', {'branch': 'main'}
+nmap <leader>yosc <Plug>OSCYankOperator
+vmap <leader>yosc <Plug>OSCYankVisual
+
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
